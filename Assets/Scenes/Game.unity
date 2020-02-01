@@ -1637,6 +1637,7 @@ MonoBehaviour:
   _shakeTime: 2
   _backVelocity: 2
   _explosionAudioTime: 0.6
+  _backAudioTime: 1.2
 --- !u!1 &1649002002
 GameObject:
   m_ObjectHideFlags: 0
@@ -1938,6 +1939,7 @@ MonoBehaviour:
   _clips:
   - {fileID: 8300000, guid: 65a46dd5c5e074484b65dd91046e11f6, type: 3}
   - {fileID: 8300000, guid: 72149bd3ec753488e82f4407b592138c, type: 3}
+  - {fileID: 8300000, guid: 7730dfb9fc38e412aa02c84d07f388a8, type: 3}
 --- !u!1 &2027042332
 GameObject:
   m_ObjectHideFlags: 0

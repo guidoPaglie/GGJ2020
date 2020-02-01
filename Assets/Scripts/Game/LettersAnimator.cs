@@ -23,6 +23,7 @@ namespace Game
         [SerializeField] private float _shakeTime = 3f;
         [SerializeField] private float _backVelocity = 2f;
         [SerializeField] private float _explosionAudioTime = 0.5f;
+        [SerializeField] private float _backAudioTime = 1.0f;
 
         private AnimationState _animationState = AnimationState.Shake;
         private bool _started;
@@ -33,6 +34,7 @@ namespace Game
         private Action _onFinishedAnim;
         private bool _explodeFinished;
         private bool _explosionAudio;
+        private bool _backAudio;
 
         public void OnStart(Action onFinishedAnim)
         {
@@ -75,7 +77,7 @@ namespace Game
             if (_shakeTime <= _explosionAudioTime && !_explosionAudio)
             {
                 _explosionAudio = true;
-                AudioController.Instance.Play(AudioController.Explosion);
+                AudioController.Instance.Play(AudioKeys.Explosion);
             }
             
             if (!(_shakeTime <= 0.0f)) return;
@@ -113,9 +115,17 @@ namespace Game
 
             _backTimer += Time.deltaTime;
 
+            if (Vector3.Distance(_letters[_currentLetter].transform.position,
+                    _letters[_currentLetter]._initialPosition) <= _backAudioTime && !_backAudio)
+            {
+                AudioController.Instance.Play(AudioKeys.PositionLetter);
+                _backAudio = true;
+            }
+            
             if (Vector3.Distance(_letters[_currentLetter].transform.position, _letters[_currentLetter]._initialPosition) > 0.5f)
                 return;
 
+            _backAudio = false;
             _letters[_currentLetter].transform.position = _letters[_currentLetter]._initialPosition;
                     
             _currentLetter++;

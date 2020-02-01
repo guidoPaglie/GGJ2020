@@ -34,7 +34,7 @@ public class AlphaAnimator : MonoBehaviour
         if ( _onFinished != null && _timer >= 0.8f && !_shakeAudio) // it's calling from Game ... :D
         {
             _shakeAudio = true;
-            AudioController.Instance.Play(AudioController.ShakeKey);
+            AudioController.Instance.Play(AudioKeys.ShakeKey);
         }
 
         if (_timer >= 1.0f)
