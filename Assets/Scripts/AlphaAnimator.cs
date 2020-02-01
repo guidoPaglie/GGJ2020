@@ -11,7 +11,7 @@ public class AlphaAnimator : MonoBehaviour
     private bool _start;
     private Action _onFinished;
     private bool _shakeAudio;
-    
+
     public void OnStart(Action onFinished = null)
     {
         _start = true;
@@ -31,7 +31,7 @@ public class AlphaAnimator : MonoBehaviour
 
         _timer += Time.deltaTime;
 
-        if ( _onFinished != null && _timer >= 0.8f && !_shakeAudio) // it's calling from Game ... :D
+        if (_timer >= 0.8f && !_shakeAudio)
         {
             _shakeAudio = true;
             AudioController.Instance.Play(AudioKeys.ShakeKey);
@@ -40,9 +40,7 @@ public class AlphaAnimator : MonoBehaviour
         if (_timer >= 1.0f)
         {
             enabled = false;
-
-            if (_onFinished != null)
-                _onFinished();
+            _onFinished();
         }
     }
 }
