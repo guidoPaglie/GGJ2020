@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465934, g: 0.49642956, b: 0.5748249, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028374, g: 0.22571413, b: 0.3069228, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -312,7 +312,7 @@ MonoBehaviour:
   - {fileID: 1054018443}
   _lettersContainer: {fileID: 1643179355}
   _letterAnimator: {fileID: 1643179357}
-  _useCheats: 1
+  _useCheats: 0
   _startWithIndex: 0
   _startGameplay: 1
 --- !u!4 &460623387

@@ -10,28 +10,32 @@ namespace Game
     {
         private enum AnimationState
         {
-            Shake, Explode, Back
+            Shake,
+            Explode,
+            Back
         }
 
         private readonly List<Vector3> _explodePositions = new List<Vector3>();
-        
+
         [SerializeField] private List<Letter> _letters;
         [SerializeField] private float _shakeAmount = 0.1f;
         [SerializeField] private float _shakeIncrease = 10f;
         [SerializeField] private float _shakeTime = 3f;
+        [SerializeField] private float _backVelocity = 2f;
 
         private AnimationState _animationState = AnimationState.Shake;
         private bool _started;
         private float _explodeTimer;
         private float _backTimer;
         private int _currentLetter;
-        private float _offsetOutside = 200;
+        private float _offsetOutside = 500;
         private Action _onFinishedAnim;
-
+        private bool _explodeFinished;
+        
         public void OnStart(Action onFinishedAnim)
         {
             _started = true;
-            
+
             _onFinishedAnim = onFinishedAnim;
         }
 
@@ -60,7 +64,7 @@ namespace Game
             _letters.ForEach(letter =>
             {
                 Vector3 aux = Random.insideUnitCircle * _shakeAmount;
-                _shakeAmount += (Time.deltaTime/ _shakeIncrease);
+                _shakeAmount += (Time.deltaTime / _shakeIncrease);
                 letter.transform.position = aux + letter._initialPosition;
             });
 
@@ -68,10 +72,7 @@ namespace Game
 
             if (!(_shakeTime <= 0.0f)) return;
             {
-                _letters.ForEach(letter =>
-                {
-                    _explodePositions.Add(GetRandomPosition()); 
-                });
+                _letters.ForEach(letter => { _explodePositions.Add(GetRandomPosition()); });
                 _animationState = AnimationState.Explode;
             }
         }
@@ -80,24 +81,33 @@ namespace Game
         {
             for (int i = 0; i < _letters.Count; i++)
             {
-                _letters[i].transform.position = Vector3.MoveTowards(_letters[i].transform.position, _explodePositions[i],_explodeTimer);
+                var from = _letters[i].transform.position;
+                var to = _explodePositions[i];
+                _letters[i].transform.position = Vector3.MoveTowards(from, to, _explodeTimer);
                 _explodeTimer += Time.deltaTime;
             }
 
-            if (Vector3.Distance(_letters[0].transform.position, _explodePositions[0]) <= 1.0f)
+            for (int i = 0; i < _letters.Count; i++)
+            {
+                if (Vector3.Distance(_letters[i].transform.position, _explodePositions[i]) > 1.0f)
+                    break;
+                    
                 _animationState = AnimationState.Back;
+            }
         }
 
         private void Back()
         {
             _letters[_currentLetter].transform.position = Vector3.MoveTowards(
-                _letters[_currentLetter].transform.position, _letters[_currentLetter]._initialPosition, _backTimer * 2);
+                _letters[_currentLetter].transform.position, _letters[_currentLetter]._initialPosition, _backTimer * _backVelocity);
 
             _backTimer += Time.deltaTime;
 
-            if (!(_backTimer >= 0.5f)) 
+            if (Vector3.Distance(_letters[_currentLetter].transform.position, _letters[_currentLetter]._initialPosition) > 0.5f)
                 return;
-            
+
+            _letters[_currentLetter].transform.position = _letters[_currentLetter]._initialPosition;
+                    
             _currentLetter++;
             _backTimer = 0;
 
@@ -125,7 +135,7 @@ namespace Game
             else if (randomPos == 2)
             {
                 //izq
-                newPosition = new Vector3(0 -_offsetOutside, Random.Range(0.0f, Screen.height), 10);
+                newPosition = new Vector3(0 - _offsetOutside, Random.Range(0.0f, Screen.height), 10);
             }
             else if (randomPos == 3)
             {
