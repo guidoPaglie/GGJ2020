@@ -30,8 +30,6 @@ namespace Letters
             base.Reset();
             
             _animation.Stop();
-            
-            transform.localScale = Vector3.one;
         }
     }
 }

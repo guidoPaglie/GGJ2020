@@ -4,20 +4,36 @@ using Random = UnityEngine.Random;
 
 namespace Letters
 {
-    public class LetterR : Letter
+    public class LetterRBis : Letter
     {
-        private bool _finished;
+        private Vector3 _nextPosition;
+
+        private float _delta;
 
         public override void Break(Action letterRepaired)
         {
             base.Break(letterRepaired);
-
+            
             CalculateNewRandomPosition();
+        }
+
+        public override void OnUpdate()
+        {
+            _delta += Time.deltaTime;
+            
+            transform.position = Vector3.MoveTowards(transform.position, _nextPosition, _delta);
+            
+            if (Vector3.Distance(transform.position, _nextPosition) <= 1.0f)
+            {
+                _delta = 0;
+                CalculateNewRandomPosition();
+            }
+
         }
 
         private void CalculateNewRandomPosition()
         {
-            var randomPos = Random.Range(0, 3);
+            var randomPos = Random.Range(0, 4);
             var newPosition = Vector3.zero;
             if (randomPos == 0)
             {
@@ -31,37 +47,16 @@ namespace Letters
             {
                 newPosition = new Vector3(0, Random.Range(0.0f, Screen.height), 10);
             }
-
-            transform.position = Camera.main.ScreenToWorldPoint(newPosition);
-        }
-
-        private void OnMouseDrag()
-        {
-            if (_finished)
-                return;
-
-            var mousePositionX = Input.mousePosition.x;
-            var mousePositionY = Input.mousePosition.y;
-            transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePositionX, mousePositionY, 10));
-
-            if (transform.position.x >= -3)
+            else if (randomPos == 3)
             {
-                Finished();
+                newPosition = new Vector3(Screen.width, Random.Range(0.0f, Screen.height), 10);
             }
+
+            _nextPosition = Camera.main.ScreenToWorldPoint(newPosition);
         }
 
-        private void OnMouseUp()
+        private void OnMouseDown()
         {
-            if (_finished)
-                return;
-
-            CalculateNewRandomPosition();
-        }
-
-        private void Finished()
-        {
-            _finished = true;
-
             _letterRepaired();
         }
     }
