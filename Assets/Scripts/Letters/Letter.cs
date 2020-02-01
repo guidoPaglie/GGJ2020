@@ -6,9 +6,9 @@ namespace Letters
     public class Letter : MonoBehaviour
     {
         protected Action _letterRepaired;
+        protected Vector3 _initialPosition;
 
         private BoxCollider2D _collider2D;
-        private Vector3 _initialPosition;
         private Quaternion _initialRotation;
         private Vector3 _initialScale;
             

@@ -6,8 +6,10 @@ namespace Letters
 {
     public class LetterR : Letter
     {
+        [SerializeField] private float _minDistanceToRepair;
+        
         private bool _finished;
-
+        
         public override void Break(Action letterRepaired)
         {
             base.Break(letterRepaired);
@@ -44,7 +46,7 @@ namespace Letters
             var mousePositionY = Input.mousePosition.y;
             transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePositionX, mousePositionY, 10));
 
-            if (transform.position.x >= -3)
+            if (Vector3.Distance(transform.position, _initialPosition) <= _minDistanceToRepair)
             {
                 Finished();
             }
