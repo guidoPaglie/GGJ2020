@@ -12,7 +12,7 @@ namespace Letters
         private Quaternion _initialRotation;
         private Vector3 _initialScale;
             
-        private void Awake()
+        public void OnAwake()
         {
             _collider2D = GetComponent<BoxCollider2D>();
             _initialPosition = transform.position;

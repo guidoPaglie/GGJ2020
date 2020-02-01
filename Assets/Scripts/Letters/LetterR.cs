@@ -7,6 +7,8 @@ namespace Letters
     public class LetterR : Letter
     {
         [SerializeField] private float _minDistanceToRepair;
+        [SerializeField] private float _offsetX;
+        [SerializeField] private float _offsetY;
         
         private bool _finished;
         
@@ -42,21 +44,19 @@ namespace Letters
             if (_finished)
                 return;
 
-            var mousePositionX = Input.mousePosition.x;
-            var mousePositionY = Input.mousePosition.y;
+            var mousePositionX = Input.mousePosition.x - _offsetX;
+            var mousePositionY = Input.mousePosition.y - _offsetY;
             transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePositionX, mousePositionY, 10));
 
             if (Vector3.Distance(transform.position, _initialPosition) <= _minDistanceToRepair)
-            {
                 Finished();
-            }
         }
 
         private void OnMouseUp()
         {
             if (_finished)
                 return;
-
+            
             CalculateNewRandomPosition();
         }
 
