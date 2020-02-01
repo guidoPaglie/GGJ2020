@@ -22,6 +22,7 @@ namespace Game
         [SerializeField] private float _shakeIncrease = 10f;
         [SerializeField] private float _shakeTime = 3f;
         [SerializeField] private float _backVelocity = 2f;
+        [SerializeField] private float _explosionAudioTime = 0.5f;
 
         private AnimationState _animationState = AnimationState.Shake;
         private bool _started;
@@ -31,7 +32,8 @@ namespace Game
         private float _offsetOutside = 500;
         private Action _onFinishedAnim;
         private bool _explodeFinished;
-        
+        private bool _explosionAudio;
+
         public void OnStart(Action onFinishedAnim)
         {
             _started = true;
@@ -58,7 +60,7 @@ namespace Game
                     throw new ArgumentOutOfRangeException();
             }
         }
-
+        
         private void Shake()
         {
             _letters.ForEach(letter =>
@@ -70,10 +72,18 @@ namespace Game
 
             _shakeTime -= Time.deltaTime;
 
+            if (_shakeTime <= _explosionAudioTime && !_explosionAudio)
+            {
+                _explosionAudio = true;
+                AudioController.Instance.Play(AudioController.Explosion);
+            }
+            
             if (!(_shakeTime <= 0.0f)) return;
             {
                 _letters.ForEach(letter => { _explodePositions.Add(GetRandomPosition()); });
                 _animationState = AnimationState.Explode;
+                
+                
             }
         }
 
