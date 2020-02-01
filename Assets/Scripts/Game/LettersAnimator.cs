@@ -13,6 +13,8 @@ namespace Game
             Shake, Explode, Back
         }
 
+        private readonly List<Vector3> _explodePositions = new List<Vector3>();
+        
         [SerializeField] private List<Letter> _letters;
         [SerializeField] private float _shakeAmount = 0.1f;
         [SerializeField] private float _shakeIncrease = 10f;
@@ -20,25 +22,18 @@ namespace Game
 
         private AnimationState _animationState = AnimationState.Shake;
         private bool _started;
-        private float _timer;
+        private float _explodeTimer;
+        private float _backTimer;
         private int _currentLetter;
-        private float _offsetOutside = 300;
-        
-        public void OnStart()
+        private float _offsetOutside = 200;
+        private Action _onFinishedAnim;
+
+        public void OnStart(Action onFinishedAnim)
         {
             _started = true;
             
-            
-            //First Shake
-            
-            
-            //Then Explode
-            
-            //Then came backs
-            
-            //_letters.ForEach(letter => letter.transform.position = GetRandomPosition());
+            _onFinishedAnim = onFinishedAnim;
         }
-
 
         private void Update()
         {
@@ -71,34 +66,45 @@ namespace Game
 
             _shakeTime -= Time.deltaTime;
 
-            if (_shakeTime <= 0.0f)
+            if (!(_shakeTime <= 0.0f)) return;
+            {
+                _letters.ForEach(letter =>
+                {
+                    _explodePositions.Add(GetRandomPosition()); 
+                });
                 _animationState = AnimationState.Explode;
+            }
         }
 
         private void Explode()
         {
-            _letters.ForEach(letter =>
+            for (int i = 0; i < _letters.Count; i++)
             {
-                
-            });
+                _letters[i].transform.position = Vector3.MoveTowards(_letters[i].transform.position, _explodePositions[i],_explodeTimer);
+                _explodeTimer += Time.deltaTime;
+            }
+
+            if (Vector3.Distance(_letters[0].transform.position, _explodePositions[0]) <= 1.0f)
+                _animationState = AnimationState.Back;
         }
 
         private void Back()
         {
             _letters[_currentLetter].transform.position = Vector3.MoveTowards(
-                _letters[_currentLetter].transform.position, _letters[_currentLetter]._initialPosition, _timer);
+                _letters[_currentLetter].transform.position, _letters[_currentLetter]._initialPosition, _backTimer * 2);
 
-            _timer += Time.deltaTime;
+            _backTimer += Time.deltaTime;
 
-            if (_timer >= 1.0f)
+            if (!(_backTimer >= 0.5f)) 
+                return;
+            
+            _currentLetter++;
+            _backTimer = 0;
+
+            if (_currentLetter >= _letters.Count)
             {
-                _currentLetter++;
-                _timer = 0;
-
-                if (_currentLetter >= _letters.Count)
-                {
-                    enabled = false;
-                }
+                enabled = false;
+                _onFinishedAnim();
             }
         }
 

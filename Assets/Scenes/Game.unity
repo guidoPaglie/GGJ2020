@@ -999,6 +999,7 @@ MonoBehaviour:
   - {fileID: 1054018443}
   _shakeAmount: 0.1
   _shakeIncrease: 30
+  _shakeTime: 1
 --- !u!1 &1649002002
 GameObject:
   m_ObjectHideFlags: 0

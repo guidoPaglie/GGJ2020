@@ -6,7 +6,7 @@ namespace Letters
     public class Letter : MonoBehaviour
     {
         [NonSerialized] public Vector3 _initialPosition;
-        
+
         protected Action _letterRepaired;
 
         private BoxCollider2D _collider2D;

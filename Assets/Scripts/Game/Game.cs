@@ -18,7 +18,6 @@ namespace Game
 
         private int _letterIndex;
         private bool _finished;
-        private bool _gameplayStarted;
         
         private void Awake()
         {
@@ -28,15 +27,17 @@ namespace Game
             {
                 _letterIndex = _startWithIndex;
                 _lettersContainer.SetActive(true);
-                _gameplayStarted = true;
 
-                _letterAnimator.OnStart();
-                //BreakNextLetter();
+                _lettersContainer.SetActive(true);
+                BreakNextLetter();
             }
             else
             {
-                _letterAnimator.OnStart();
-                _alphaAnimator.OnStart();
+                _alphaAnimator.OnStart(() =>
+                {
+                    _lettersContainer.SetActive(true);
+                    _letterAnimator.OnStart(BreakNextLetter);
+                });
             }
         }
 

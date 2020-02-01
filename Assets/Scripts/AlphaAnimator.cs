@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class AlphaAnimator : MonoBehaviour
@@ -8,16 +9,18 @@ public class AlphaAnimator : MonoBehaviour
 
     private float _timer;
     private bool _start;
+    private Action _onFinished;
 
-    public void OnStart()
+    public void OnStart(Action onFinished = null)
     {
         _start = true;
+        _onFinished = onFinished;
     }
 
     private void Update()
     {
         if (!_start) return;
-            
+
         var color = _spriteRenderer.color;
 
         var alpha = Mathf.Lerp(_from, _to, _timer);
@@ -28,6 +31,11 @@ public class AlphaAnimator : MonoBehaviour
         _timer += Time.deltaTime;
 
         if (_timer >= 1.0f)
+        {
             enabled = false;
+
+            if (_onFinished != null)
+                _onFinished();
+        }
     }
 }
