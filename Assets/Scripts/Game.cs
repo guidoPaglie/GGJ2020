@@ -13,7 +13,7 @@ public class Game : MonoBehaviour
     private int _letterIndex;
     private bool _finished;
     
-    private void Awake()
+    private void Start()
     {
         BreakNextLetter();
     }

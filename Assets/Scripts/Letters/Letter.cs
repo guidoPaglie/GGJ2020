@@ -7,8 +7,19 @@ namespace Letters
     {
         protected Action _letterRepaired;
 
+        private BoxCollider2D _collider2D;
+        
+        private void Awake()
+        {
+            _collider2D = GetComponent<BoxCollider2D>();
+
+            _collider2D.enabled = false;
+        }
+
         public virtual void Break(Action letterRepaired)
         {
+            _collider2D.enabled = true;
+            
             _letterRepaired = letterRepaired;
         }
 
@@ -18,7 +29,7 @@ namespace Letters
 
         public virtual void Reset()
         {
-            GetComponent<BoxCollider2D>().enabled = false;
+            _collider2D.enabled = false;
         }
     }
 }
