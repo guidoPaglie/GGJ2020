@@ -4,14 +4,13 @@ using Random = UnityEngine.Random;
 
 namespace Letters
 {
-    public class LetterR : MonoBehaviour
+    public class LetterR : Letter
     {
-        private Action _letterRepaired;
         private bool _finished;
 
-        public void Break(Action letterRepaired)
+        public override void Break(Action letterRepaired)
         {
-            _letterRepaired = letterRepaired;
+            base.Break(letterRepaired);
 
             CalculateNewRandomPosition();
         }
@@ -42,7 +41,7 @@ namespace Letters
         {
             if (_finished)
                 return;
-            
+
             var mousePositionX = Input.mousePosition.x;
             var mousePositionY = Input.mousePosition.y;
             transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePositionX, mousePositionY, 10));
@@ -63,9 +62,8 @@ namespace Letters
 
         private void Finished()
         {
-            GetComponent<BoxCollider2D>().enabled = false;
             _finished = true;
-            
+
             _letterRepaired();
         }
     }

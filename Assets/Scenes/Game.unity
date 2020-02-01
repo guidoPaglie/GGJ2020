@@ -303,7 +303,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _letters:
+  - {fileID: 1333703217}
   - {fileID: 834105435}
+  _useCheats: 0
+  _startWithIndex: 0
 --- !u!4 &478076202
 Transform:
   m_ObjectHideFlags: 0
@@ -327,8 +330,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 834105433}
-  - component: {fileID: 834105435}
   - component: {fileID: 834105434}
+  - component: {fileID: 834105435}
   m_Layer: 0
   m_Name: E
   m_TagString: Untagged
@@ -375,7 +378,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5193386, y: 1.849246}
+  m_Size: {x: 1.5193386, y: 2.0582862}
   m_EdgeRadius: 0
 --- !u!114 &834105435
 MonoBehaviour:
@@ -386,9 +389,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 834105432}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 355caa7cf9d24b048521c2182af9b296, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a77f02fa3964d66b0efef067fd5df71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 2027042334}
+  _onUpdateSubstract: -0.005
+  _onClickSum: 0.1
 --- !u!1 &884709031
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,8 +473,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1333703218}
-  - component: {fileID: 1333703217}
   - component: {fileID: 1333703219}
+  - component: {fileID: 1333703217}
   m_Layer: 0
   m_Name: R
   m_TagString: Untagged
