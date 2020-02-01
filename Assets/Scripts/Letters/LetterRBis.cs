@@ -37,11 +37,11 @@ namespace Letters
             var newPosition = Vector3.zero;
             if (randomPos == 0)
             {
-                newPosition = new Vector3(Random.Range(0.0f, Screen.width / 2), Screen.height, 10);
+                newPosition = new Vector3(Random.Range(0.0f, Screen.width), Screen.height, 10);
             }
             else if (randomPos == 1)
             {
-                newPosition = new Vector3(Random.Range(0.0f, Screen.width / 2), 0, 10);
+                newPosition = new Vector3(Random.Range(0.0f, Screen.width), 0, 10);
             }
             else if (randomPos == 2)
             {

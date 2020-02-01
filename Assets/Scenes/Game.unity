@@ -311,7 +311,8 @@ MonoBehaviour:
   - {fileID: 1400659514}
   - {fileID: 1054018443}
   _lettersContainer: {fileID: 1643179355}
-  _useCheats: 0
+  _letterAnimator: {fileID: 1643179357}
+  _useCheats: 1
   _startWithIndex: 0
   _startGameplay: 1
 --- !u!4 &460623387
@@ -949,6 +950,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1643179356}
+  - component: {fileID: 1643179357}
   m_Layer: 0
   m_Name: Letters
   m_TagString: Untagged
@@ -976,6 +978,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1643179357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643179355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd49262edd3144acbd273c3b031a2502, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _letters:
+  - {fileID: 1333703217}
+  - {fileID: 834105435}
+  - {fileID: 1649002004}
+  - {fileID: 1880623939}
+  - {fileID: 1400659514}
+  - {fileID: 1054018443}
+  _shakeAmount: 0.1
+  _shakeIncrease: 30
 --- !u!1 &1649002002
 GameObject:
   m_ObjectHideFlags: 0

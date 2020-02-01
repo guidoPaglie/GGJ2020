@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Letters;
 using UnityEngine;
@@ -10,6 +9,7 @@ namespace Game
         [SerializeField] private AlphaAnimator _alphaAnimator;
         [SerializeField] private List<Letter> _letters;
         [SerializeField] private GameObject _lettersContainer;
+        [SerializeField] private LettersAnimator _letterAnimator;
 
         [Header("Cheats")] 
         [SerializeField] private bool _useCheats;
@@ -18,7 +18,7 @@ namespace Game
 
         private int _letterIndex;
         private bool _finished;
-        private bool _gameplayStared;
+        private bool _gameplayStarted;
         
         private void Awake()
         {
@@ -28,11 +28,14 @@ namespace Game
             {
                 _letterIndex = _startWithIndex;
                 _lettersContainer.SetActive(true);
-                _gameplayStared = true;
-                BreakNextLetter();
+                _gameplayStarted = true;
+
+                _letterAnimator.OnStart();
+                //BreakNextLetter();
             }
             else
             {
+                _letterAnimator.OnStart();
                 _alphaAnimator.OnStart();
             }
         }
