@@ -28,7 +28,6 @@ namespace Letters
                 _delta = 0;
                 CalculateNewRandomPosition();
             }
-
         }
 
         private void CalculateNewRandomPosition()
@@ -53,6 +52,12 @@ namespace Letters
             }
 
             _nextPosition = Camera.main.ScreenToWorldPoint(newPosition);
+        }
+
+        public override void Reset()
+        {
+            base.Reset();
+            _textAnimation.gameObject.SetActive(false);
         }
 
         private void OnMouseDown()

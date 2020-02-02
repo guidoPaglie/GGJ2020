@@ -9,12 +9,13 @@ namespace Letters
     public class Letter : MonoBehaviour
     {
         [NonSerialized] public Vector3 _initialPosition;
+        [NonSerialized] public SpriteRenderer _spriteRenderer;
         
-        [SerializeField] private TextAnimation _textAnimation;
+        [SerializeField] protected TextAnimation _textAnimation;
+        
         [SerializeField] private string _txt;
 
         protected Action _letterRepaired;
-        protected SpriteRenderer _spriteRenderer;
         
         private BoxCollider2D _collider2D;
         private Quaternion _initialRotation;

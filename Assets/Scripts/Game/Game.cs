@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Letters;
 using UnityEngine;
@@ -6,30 +7,39 @@ namespace Game
 {
     public class Game : MonoBehaviour
     {
+        private enum GameState
+        {
+            Animating,
+            Playing,
+            Waiting,
+            Finish,
+            End
+        }
+
         [SerializeField] private AlphaAnimator _alphaAnimator;
         [SerializeField] private List<Letter> _letters;
         [SerializeField] private GameObject _lettersContainer;
         [SerializeField] private LettersAnimator _letterAnimator;
         [SerializeField] private GameObject _music;
+        [SerializeField] private float _finishGameTimer = 4.0f;
 
-        [Header("Cheats")] 
-        [SerializeField] private bool _useCheats;
+        [Header("Cheats")] [SerializeField] private bool _useCheats;
         [SerializeField] private int _startWithIndex;
         [SerializeField] private bool _startGameplay;
 
+        private GameState _gameState = GameState.Animating;
         private int _letterIndex;
-        private bool _finished;
-        
+        private float _finishTimer;
+
         private void Awake()
         {
             _letters.ForEach(letter => letter.OnAwake());
-            
+
             if (_useCheats && _startGameplay)
             {
                 _letterIndex = _startWithIndex;
                 _lettersContainer.SetActive(true);
 
-                _lettersContainer.SetActive(true);
                 BreakNextLetter();
             }
             else
@@ -39,6 +49,7 @@ namespace Game
                     _lettersContainer.SetActive(true);
                     _letterAnimator.OnStart(() =>
                     {
+                        _gameState = GameState.Playing;
                         _music.SetActive(true);
                         BreakNextLetter();
                     });
@@ -49,14 +60,6 @@ namespace Game
         private void BreakNextLetter()
         {
             _letters[_letterIndex].Break(LetterRepaired);
-        }
-
-        private void Update()
-        {
-            if (_finished)
-                return;
-
-            _letters[_letterIndex].OnUpdate();
         }
 
         private void LetterRepaired()
@@ -78,10 +81,60 @@ namespace Game
             _letters[_letterIndex].Reset();
         }
 
+        private void Update()
+        {
+            switch (_gameState)
+            {
+                case GameState.Animating:
+                    break;
+                case GameState.Playing:
+                    _letters[_letterIndex].OnUpdate();
+                    break;
+                case GameState.Waiting:
+                    break;
+                case GameState.Finish:
+                    _letters.ForEach(MergeWithSky);
+                    break;
+                case GameState.End:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         private void GameFinished()
         {
-            _finished = true;
-            Debug.Log("Game won");
+            UnityEngine.Debug.Log("Game finish");
+            _gameState = GameState.Waiting;
+            Invoke(nameof(ChangeState), _finishGameTimer);
+        }
+
+        private void ChangeState()
+        {
+            _gameState = GameState.Finish;
+        }
+
+        private void MergeWithSky(Letter letter)
+        {
+            var color = letter._spriteRenderer.color;
+
+            var alpha = Mathf.Lerp(1, 0, _finishTimer);
+            color.a = alpha;
+            letter._spriteRenderer.color = color;
+
+            _finishTimer += Time.deltaTime/2;
+
+            var scale = letter.transform.localScale;
+            scale.x -= alpha;
+            scale.y -= alpha;
+            letter.transform.localScale = scale;
+
+            
+            if (_finishTimer >= 1.0f)
+            {
+                Debug.Log("FINISH");
+                _gameState = GameState.Finish;
+            }
         }
     }
 }

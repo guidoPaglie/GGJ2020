@@ -313,8 +313,9 @@ MonoBehaviour:
   _lettersContainer: {fileID: 1643179355}
   _letterAnimator: {fileID: 1643179357}
   _music: {fileID: 1288991445}
+  _finishGameTimer: 4
   _useCheats: 0
-  _startWithIndex: 2
+  _startWithIndex: 5
   _startGameplay: 1
 --- !u!4 &460623387
 Transform:
@@ -1292,7 +1293,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.65
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
