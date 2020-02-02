@@ -25,6 +25,7 @@ namespace Game
         [SerializeField] private LettersAnimator _letterAnimator;
         [SerializeField] private GameObject _music;
         [SerializeField] private float _finishGameTimer = 4.0f;
+        [SerializeField] private float _scaleVelocity = 2.0f;
 
         [Header("Cheats")] [SerializeField] private bool _useCheats;
         [SerializeField] private int _startWithIndex;
@@ -33,6 +34,7 @@ namespace Game
         private GameState _gameState = GameState.Animating;
         private int _letterIndex;
         private float _finishTimer;
+        private int _mergeWithSkyIndex;
 
         private void Awake()
         {
@@ -62,7 +64,7 @@ namespace Game
         private IEnumerator BreakAnimation()
         {
             _gameState = GameState.BreakAnimation;
-            float timer = 1.0f; 
+            float timer = 1.0f;
 
             while (timer >= 0.0f)
             {
@@ -71,7 +73,7 @@ namespace Game
                 Vector3 aux = Random.insideUnitCircle * 0.1f;
                 _letters[_letterIndex].transform.position = aux + _letters[_letterIndex]._initialPosition;
             }
-            
+
             _gameState = GameState.Playing;
             _letters[_letterIndex].transform.position = _letters[_letterIndex]._initialPosition;
             BreakNextLetter();
@@ -113,7 +115,7 @@ namespace Game
                 case GameState.Waiting:
                     break;
                 case GameState.Finish:
-                    _letters.ForEach(MergeWithSky);
+                    MergeWithSky(_letters[_mergeWithSkyIndex]);
                     break;
                 case GameState.End:
                     break;
@@ -126,7 +128,6 @@ namespace Game
 
         private void GameFinished()
         {
-            Debug.Log("Game finish");
             _gameState = GameState.Waiting;
             Invoke(nameof(ChangeState), _finishGameTimer);
         }
@@ -144,17 +145,23 @@ namespace Game
             color.a = alpha;
             letter._spriteRenderer.color = color;
 
-            _finishTimer += Time.deltaTime/2;
+            _finishTimer += Time.deltaTime * _scaleVelocity;
 
             var scale = letter.transform.localScale;
-            scale.x -= alpha/10;
-            scale.y -= alpha/10;
+            scale.x = alpha;
+            scale.y = alpha;
             letter.transform.localScale = scale;
-            
+
             if (_finishTimer >= 1.0f)
             {
-                Debug.Log("FINISH");
-                _gameState = GameState.Finish;
+                _mergeWithSkyIndex++;
+                _finishTimer = 0;
+
+                if (_mergeWithSkyIndex >= _letters.Count)
+                {
+                    UnityEngine.Debug.Log("Finish animating");
+                    _gameState = GameState.End;
+                }
             }
         }
     }
