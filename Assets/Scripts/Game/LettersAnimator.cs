@@ -65,10 +65,11 @@ namespace Game
         
         private void Shake()
         {
+            _shakeAmount += _shakeIncrease;
+            
             _letters.ForEach(letter =>
             {
                 Vector3 aux = Random.insideUnitCircle * _shakeAmount;
-                _shakeAmount += (Time.deltaTime / _shakeIncrease);
                 letter.transform.position = aux + letter._initialPosition;
             });
 
@@ -84,8 +85,6 @@ namespace Game
             {
                 _letters.ForEach(letter => { _explodePositions.Add(GetRandomPosition()); });
                 _animationState = AnimationState.Explode;
-                
-                
             }
         }
 

@@ -9825,8 +9825,9 @@ MonoBehaviour:
   _lettersContainer: {fileID: 1643179355}
   _letterAnimator: {fileID: 1643179357}
   _music: {fileID: 1288991445}
-  _finishGameTimer: 0.5
-  _useCheats: 1
+  _finishGameTimer: 1
+  _scaleVelocity: 3
+  _useCheats: 0
   _startWithIndex: 5
   _startGameplay: 1
 --- !u!4 &460623387
@@ -39972,8 +39973,8 @@ MonoBehaviour:
   - {fileID: 1880623939}
   - {fileID: 1400659514}
   - {fileID: 1054018443}
-  _shakeAmount: 0.2
-  _shakeIncrease: 30
+  _shakeAmount: 0.1
+  _shakeIncrease: 0.005
   _shakeTime: 2
   _backVelocity: 2
   _explosionAudioTime: 0.6
