@@ -9827,6 +9827,11 @@ MonoBehaviour:
   _music: {fileID: 1288991445}
   _finishGameTimer: 1
   _scaleVelocity: 3
+  _backgroundSpriteRenderer: {fileID: 922952990}
+  _shaderVelocity: 1
+  _shaderWaveLength: 3
+  _shaderPower: 0.01
+  _shaderSpeed: 1
   _useCheats: 0
   _startWithIndex: 5
   _startGameplay: 1
@@ -24565,7 +24570,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b6d814551024241b7b26197824bcc7dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

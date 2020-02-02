@@ -26,7 +26,14 @@ namespace Game
         [SerializeField] private GameObject _music;
         [SerializeField] private float _finishGameTimer = 4.0f;
         [SerializeField] private float _scaleVelocity = 2.0f;
+        [SerializeField] private SpriteRenderer _backgroundSpriteRenderer;
 
+        [Header("Shader")]
+        [SerializeField] private float _shaderVelocity;
+        [SerializeField] private float _shaderWaveLength;
+        [SerializeField] [Range(0,0.15f)] private float _shaderPower;
+        [SerializeField] private float _shaderSpeed;
+        
         [Header("Cheats")] [SerializeField] private bool _useCheats;
         [SerializeField] private int _startWithIndex;
         [SerializeField] private bool _startGameplay;
@@ -118,6 +125,7 @@ namespace Game
                     MergeWithSky(_letters[_mergeWithSkyIndex]);
                     break;
                 case GameState.End:
+                    End();
                     break;
                 case GameState.BreakAnimation:
                     break;
@@ -159,10 +167,25 @@ namespace Game
 
                 if (_mergeWithSkyIndex >= _letters.Count)
                 {
-                    UnityEngine.Debug.Log("Finish animating");
-                    _gameState = GameState.End;
+                    GameEnd();
                 }
             }
+        }
+
+        private void GameEnd()
+        {
+            UnityEngine.Debug.Log("Finished animating");
+            _gameState = GameState.End;
+            /*_backgroundSpriteRenderer.material.SetFloat("_UnityTime", Time.time);
+            _backgroundSpriteRenderer.material.SetFloat("_Velocity", _shaderVelocity);
+            _backgroundSpriteRenderer.material.SetFloat("_WaveLength", _shaderWaveLength);
+            _backgroundSpriteRenderer.material.SetFloat("_Pow", _shaderPower);
+            _backgroundSpriteRenderer.material.SetFloat("_Speed", _shaderSpeed);*/
+        }
+
+        private void End()
+        {
+          
         }
     }
 }
