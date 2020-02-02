@@ -9635,6 +9635,7 @@ GameObject:
   - component: {fileID: 162967258}
   - component: {fileID: 162967257}
   - component: {fileID: 162967256}
+  - component: {fileID: 162967259}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -9706,6 +9707,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &162967259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162967255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1690312454, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &359426377
 GameObject:
   m_ObjectHideFlags: 0
@@ -9833,7 +9850,7 @@ MonoBehaviour:
   _shaderPower: 0.01
   _shaderSpeed: 1
   _useCheats: 0
-  _startWithIndex: 5
+  _startWithIndex: 0
   _startGameplay: 1
 --- !u!4 &460623387
 Transform:
@@ -34689,6 +34706,7 @@ GameObject:
   - component: {fileID: 1333703218}
   - component: {fileID: 1333703219}
   - component: {fileID: 1333703217}
+  - component: {fileID: 1333703220}
   m_Layer: 0
   m_Name: R
   m_TagString: Untagged
@@ -34713,8 +34731,7 @@ MonoBehaviour:
   _particleSystem: {fileID: 1936237010}
   _txt: a veces necesitas moverte de tu zona de confort
   _minDistanceToRepair: 0.1
-  _offsetX: 1
-  _offsetY: 1
+  _rigidbody: {fileID: 1333703220}
 --- !u!4 &1333703218
 Transform:
   m_ObjectHideFlags: 0
@@ -34756,6 +34773,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.0992608, y: 1.566785}
   m_EdgeRadius: 0
+--- !u!50 &1333703220
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333703216}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1400659512
 GameObject:
   m_ObjectHideFlags: 0
