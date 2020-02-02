@@ -147,10 +147,9 @@ namespace Game
             _finishTimer += Time.deltaTime/2;
 
             var scale = letter.transform.localScale;
-            scale.x -= alpha;
-            scale.y -= alpha;
+            scale.x -= alpha/10;
+            scale.y -= alpha/10;
             letter.transform.localScale = scale;
-
             
             if (_finishTimer >= 1.0f)
             {
