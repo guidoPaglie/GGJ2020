@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Letters;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace Game
@@ -125,7 +126,6 @@ namespace Game
                     MergeWithSky(_letters[_mergeWithSkyIndex]);
                     break;
                 case GameState.End:
-                    End();
                     break;
                 case GameState.BreakAnimation:
                     break;
@@ -176,6 +176,7 @@ namespace Game
         {
             UnityEngine.Debug.Log("Finished animating");
             _gameState = GameState.End;
+            Invoke(nameof(GoToCredits), 1.0f);
             /*_backgroundSpriteRenderer.material.SetFloat("_UnityTime", Time.time);
             _backgroundSpriteRenderer.material.SetFloat("_Velocity", _shaderVelocity);
             _backgroundSpriteRenderer.material.SetFloat("_WaveLength", _shaderWaveLength);
@@ -183,9 +184,9 @@ namespace Game
             _backgroundSpriteRenderer.material.SetFloat("_Speed", _shaderSpeed);*/
         }
 
-        private void End()
+        private void GoToCredits()
         {
-          
+            SceneManager.LoadScene("Fin");
         }
     }
 }

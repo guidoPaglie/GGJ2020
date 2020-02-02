@@ -18,6 +18,7 @@ public class AudioController : MonoBehaviour
 
     [SerializeField] private List<AudioSource> _audioSources;
     [SerializeField] private List<AudioClip> _clips;
+    [SerializeField] private List<AudioClip> _letters;
 
     private void Awake()
     {
@@ -32,6 +33,13 @@ public class AudioController : MonoBehaviour
     {
         var source = _audioSources.First(src => !src.isPlaying);
         source.clip = _clipsByKey[key];
+        source.Play();
+    }
+
+    public void PlayLetter(int currentLetter)
+    {
+        var source = _audioSources.First(src => !src.isPlaying);
+        source.clip = _letters[currentLetter];
         source.Play();
     }
 }

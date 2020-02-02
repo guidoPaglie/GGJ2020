@@ -117,7 +117,7 @@ namespace Game
             if (Vector3.Distance(_letters[_currentLetter].transform.position,
                     _letters[_currentLetter]._initialPosition) <= _backAudioTime && !_backAudio)
             {
-                AudioController.Instance.Play(AudioKeys.PositionLetter);
+                AudioController.Instance.PlayLetter(_currentLetter);
                 _backAudio = true;
             }
             
