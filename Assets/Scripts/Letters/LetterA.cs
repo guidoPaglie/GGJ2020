@@ -26,7 +26,13 @@ namespace Letters
         {
             if ((transform.eulerAngles.z >= 0 && transform.eulerAngles.z <= _minAngle) ||
                 (transform.eulerAngles.z >= _maxAngle && transform.eulerAngles.z <= 360))
+            {
                 _letterRepaired();
+            }
+            else
+            {
+                Wrong();
+            }
         }
     }
 }

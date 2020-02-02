@@ -23,6 +23,10 @@ namespace Letters
             {
                 _letterRepaired();
             }
+            else
+            {
+                Wrong();
+            }
         }
 
         public override void Reset()

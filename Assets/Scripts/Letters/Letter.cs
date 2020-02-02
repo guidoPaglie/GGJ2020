@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using Game;
-using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -53,8 +52,8 @@ namespace Letters
 
         private IEnumerator Wrongness()
         {
-            float timer = 1.0f;
-            while (timer <= 0.0f)
+            float timer = 0.0f;
+            while (timer <= 1.0f)
             {
                 yield return new WaitForEndOfFrame();
                 timer += Time.deltaTime;

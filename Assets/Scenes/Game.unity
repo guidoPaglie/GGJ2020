@@ -312,8 +312,8 @@ MonoBehaviour:
   - {fileID: 1054018443}
   _lettersContainer: {fileID: 1643179355}
   _letterAnimator: {fileID: 1643179357}
-  _useCheats: 0
-  _startWithIndex: 0
+  _useCheats: 1
+  _startWithIndex: 2
   _startGameplay: 1
 --- !u!4 &460623387
 Transform:
@@ -1781,7 +1781,7 @@ MonoBehaviour:
     spaceCount: 8
     wordCount: 9
     linkCount: 0
-    lineCount: 2
+    lineCount: 3
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
