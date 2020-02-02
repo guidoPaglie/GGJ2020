@@ -21,6 +21,8 @@ namespace Letters
             var scale = transform.localScale;
             if (scale.x >= _minScale && scale.x <= _maxScale && scale.y >= _minScale && scale.y <= _maxScale)
             {
+                _particleSystemFix.SetActive(true);
+
                 _letterRepaired();
             }
             else

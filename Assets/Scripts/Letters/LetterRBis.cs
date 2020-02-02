@@ -6,8 +6,9 @@ namespace Letters
 {
     public class LetterRBis : Letter
     {
+        [SerializeField] private float _velocity = 1.0f;
+        
         private Vector3 _nextPosition;
-
         private float _delta;
 
         public override void Break(Action letterRepaired)
@@ -21,7 +22,7 @@ namespace Letters
         {
             _delta += Time.deltaTime;
             
-            transform.position = Vector3.MoveTowards(transform.position, _nextPosition, _delta);
+            transform.position = Vector3.MoveTowards(transform.position, _nextPosition, _delta * _velocity);
             
             if (Vector3.Distance(transform.position, _nextPosition) <= 1.0f)
             {
@@ -62,6 +63,8 @@ namespace Letters
 
         private void OnMouseDown()
         {
+            _particleSystemFix.SetActive(true);
+
             _letterRepaired();
         }
     }

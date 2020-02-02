@@ -67,6 +67,7 @@ namespace Letters
         {
             _finished = true;
 
+            _particleSystemFix.SetActive(true);
             _letterRepaired();
         }
     }

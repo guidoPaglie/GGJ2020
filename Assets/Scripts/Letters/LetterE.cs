@@ -27,6 +27,8 @@ namespace Letters
 
             if (_spriteRenderer.color.a >= 1)
             {
+                _particleSystemFix.SetActive(true);
+
                 _letterRepaired();
             }
         }

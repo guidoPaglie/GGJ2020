@@ -12,6 +12,7 @@ namespace Letters
         [NonSerialized] public SpriteRenderer _spriteRenderer;
         
         [SerializeField] protected TextAnimation _textAnimation;
+        [SerializeField] protected GameObject _particleSystemFix;
         
         [SerializeField] private GameObject _particleSystem;
         [SerializeField] private string _txt;
