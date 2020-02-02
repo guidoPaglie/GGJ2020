@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using Game;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,10 +10,13 @@ namespace Letters
     public class Letter : MonoBehaviour
     {
         [NonSerialized] public Vector3 _initialPosition;
-        [NonSerialized] public SpriteRenderer _spriteRenderer;
+        
+        [SerializeField] private TextAnimation _textAnimation;
+        [SerializeField] private string _txt;
 
         protected Action _letterRepaired;
-
+        protected SpriteRenderer _spriteRenderer;
+        
         private BoxCollider2D _collider2D;
         private Quaternion _initialRotation;
         private Vector3 _initialScale;
@@ -34,6 +39,8 @@ namespace Letters
             _collider2D.enabled = true;
             
             _letterRepaired = letterRepaired;
+
+            _textAnimation.OnStart(_txt);
         }
 
         protected void Wrong()

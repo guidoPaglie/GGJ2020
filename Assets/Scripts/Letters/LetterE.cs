@@ -5,7 +5,6 @@ namespace Letters
 {
     public class LetterE : Letter
     {
-        [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private float _onUpdateSubstract;
         [SerializeField] private float _onClickSum;
 
