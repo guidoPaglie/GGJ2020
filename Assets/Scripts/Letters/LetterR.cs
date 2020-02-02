@@ -51,7 +51,6 @@ namespace Letters
         {
             if (!_clicked || _finished) return;
 
-            UnityEngine.Debug.LogError("Fixed update");
             delta = Input.mousePosition - lastPos;
 
             var mousePositionX = Input.mousePosition.x;
