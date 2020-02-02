@@ -312,7 +312,8 @@ MonoBehaviour:
   - {fileID: 1054018443}
   _lettersContainer: {fileID: 1643179355}
   _letterAnimator: {fileID: 1643179357}
-  _useCheats: 1
+  _music: {fileID: 1288991445}
+  _useCheats: 0
   _startWithIndex: 2
   _startGameplay: 1
 --- !u!4 &460623387
@@ -437,7 +438,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1959768594}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &527168013
 AudioSource:
@@ -869,7 +870,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1959768594}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &949555314
 AudioSource:
@@ -1165,7 +1166,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1959768594}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1152717517
 GameObject:
@@ -1257,12 +1258,12 @@ GameObject:
   - component: {fileID: 1288991446}
   - component: {fileID: 1288991447}
   m_Layer: 0
-  m_Name: Audio Source (4)
+  m_Name: Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1288991446
 Transform:
   m_ObjectHideFlags: 0
@@ -1275,7 +1276,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1959768594}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1288991447
 AudioSource:
@@ -1287,9 +1288,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 505bbb269a32647edb3a7538dd591652, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
+  m_audioClip: {fileID: 8300000, guid: e313ccd401ec040c6bd6e973d2eee273, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.65
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1551,7 +1552,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1959768594}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1430096581
 AudioSource:
@@ -2257,11 +2258,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1288991446}
   - {fileID: 1128817364}
   - {fileID: 1430096580}
   - {fileID: 527168012}
   - {fileID: 949555313}
-  - {fileID: 1288991446}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2282,7 +2283,6 @@ MonoBehaviour:
   - {fileID: 1430096581}
   - {fileID: 527168013}
   - {fileID: 949555314}
-  - {fileID: 1288991447}
   _clips:
   - {fileID: 8300000, guid: 65a46dd5c5e074484b65dd91046e11f6, type: 3}
   - {fileID: 8300000, guid: 72149bd3ec753488e82f4407b592138c, type: 3}

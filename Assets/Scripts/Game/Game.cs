@@ -10,6 +10,7 @@ namespace Game
         [SerializeField] private List<Letter> _letters;
         [SerializeField] private GameObject _lettersContainer;
         [SerializeField] private LettersAnimator _letterAnimator;
+        [SerializeField] private GameObject _music;
 
         [Header("Cheats")] 
         [SerializeField] private bool _useCheats;
@@ -36,7 +37,11 @@ namespace Game
                 _alphaAnimator.OnStart(() =>
                 {
                     _lettersContainer.SetActive(true);
-                    _letterAnimator.OnStart(BreakNextLetter);
+                    _letterAnimator.OnStart(() =>
+                    {
+                        _music.SetActive(true);
+                        BreakNextLetter();
+                    });
                 });
             }
         }
