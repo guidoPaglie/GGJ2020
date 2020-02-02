@@ -13,6 +13,7 @@ namespace Letters
         
         [SerializeField] protected TextAnimation _textAnimation;
         
+        [SerializeField] private GameObject _particleSystem;
         [SerializeField] private string _txt;
 
         protected Action _letterRepaired;
@@ -36,6 +37,8 @@ namespace Letters
 
         public virtual void Break(Action letterRepaired)
         {
+            _particleSystem.SetActive(true);
+            
             _collider2D.enabled = true;
             
             _letterRepaired = letterRepaired;
