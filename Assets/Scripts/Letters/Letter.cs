@@ -38,6 +38,8 @@ namespace Letters
 
         public virtual void Break(Action letterRepaired)
         {
+            AudioController.Instance.Play(AudioKeys.BreakLetter);
+            
             _particleSystem.SetActive(true);
             
             _collider2D.enabled = true;
@@ -49,6 +51,8 @@ namespace Letters
 
         protected void Wrong()
         {
+            AudioController.Instance.Play(AudioKeys.Error);
+            
             _collider2D.enabled = false;
             _spriteRenderer.color = Color.red;
 
@@ -77,6 +81,7 @@ namespace Letters
 
         public virtual void Reset()
         {
+            AudioController.Instance.Play(AudioKeys.OkLetter);
             transform.position = _initialPosition;
             transform.rotation = _initialRotation;
             transform.localScale = _initialScale;

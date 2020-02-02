@@ -52,6 +52,7 @@ namespace Game
             {
                 _letterIndex = _startWithIndex;
                 _lettersContainer.SetActive(true);
+                _music.SetActive(true);
 
                 StartCoroutine(BreakAnimation());
             }
@@ -143,6 +144,8 @@ namespace Game
         private void ChangeState()
         {
             _gameState = GameState.Finish;
+            
+            AudioController.Instance.Play(AudioKeys.FinishLetter);
         }
 
         private void MergeWithSky(Letter letter)
@@ -164,10 +167,15 @@ namespace Game
             {
                 _mergeWithSkyIndex++;
                 _finishTimer = 0;
-
+                
+                
                 if (_mergeWithSkyIndex >= _letters.Count)
                 {
                     GameEnd();
+                }
+                else
+                {
+                    AudioController.Instance.Play(AudioKeys.FinishLetter);    
                 }
             }
         }
@@ -186,7 +194,7 @@ namespace Game
 
         private void GoToCredits()
         {
-            SceneManager.LoadScene("Fin");
+            SceneManager.LoadScene("Fin", LoadSceneMode.Additive);
         }
     }
 }
