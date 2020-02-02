@@ -25,6 +25,7 @@ namespace Letters
         {
             ChangeAlpha(_animationCurve.Evaluate(_spriteRenderer.color.a));
 
+            UnityEngine.Debug.LogError(_animationCurve.Evaluate(_spriteRenderer.color.a) + " " + _spriteRenderer.color.a);
             if (_spriteRenderer.color.a >= 1)
             {
                 _particleSystemFix.SetActive(true);

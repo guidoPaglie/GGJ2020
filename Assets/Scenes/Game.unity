@@ -9850,7 +9850,7 @@ MonoBehaviour:
   _shaderPower: 0.01
   _shaderSpeed: 1
   _useCheats: 0
-  _startWithIndex: 0
+  _startWithIndex: 1
   _startGameplay: 1
 --- !u!4 &460623387
 Transform:
@@ -19659,8 +19659,31 @@ MonoBehaviour:
   _particleSystemFix: {fileID: 8116926}
   _particleSystem: {fileID: 502192375}
   _txt: oculto en la oscuridad
-  _onUpdateSubstract: -0.005
-  _onClickSum: 0.1
+  _onUpdateSubstract: -0.0012
+  _animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.01
+      inSlope: -0.1483947
+      outSlope: -0.1483947
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.034208417
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &884709031
 GameObject:
   m_ObjectHideFlags: 0

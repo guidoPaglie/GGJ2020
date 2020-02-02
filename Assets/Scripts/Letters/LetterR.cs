@@ -51,6 +51,7 @@ namespace Letters
         {
             if (!_clicked || _finished) return;
 
+            UnityEngine.Debug.LogError("Fixed update");
             delta = Input.mousePosition - lastPos;
 
             var mousePositionX = Input.mousePosition.x;
@@ -94,7 +95,9 @@ namespace Letters
             _finished = true;
             ResetRigidbody();
 
+            _rigidbody.isKinematic = true;
             _particleSystemFix.SetActive(true);
+            
             _letterRepaired();
         }
 
