@@ -6,7 +6,7 @@ namespace Letters
     public class LetterE : Letter
     {
         [SerializeField] private float _onUpdateSubstract;
-        [SerializeField] private float _onClickSum;
+        [SerializeField] private AnimationCurve _animationCurve;
 
         public override void Break(Action letterRepaired)
         {
@@ -23,7 +23,7 @@ namespace Letters
 
         private void OnMouseDown()
         {
-            ChangeAlpha(_onClickSum);
+            ChangeAlpha(_animationCurve.Evaluate(_spriteRenderer.color.a));
 
             if (_spriteRenderer.color.a >= 1)
             {
