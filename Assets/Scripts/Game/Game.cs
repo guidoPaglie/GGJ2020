@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Letters;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Game
 {
@@ -10,6 +12,7 @@ namespace Game
         private enum GameState
         {
             Animating,
+            BreakAnimation,
             Playing,
             Waiting,
             Finish,
@@ -40,7 +43,7 @@ namespace Game
                 _letterIndex = _startWithIndex;
                 _lettersContainer.SetActive(true);
 
-                BreakNextLetter();
+                StartCoroutine(BreakAnimation());
             }
             else
             {
@@ -49,12 +52,29 @@ namespace Game
                     _lettersContainer.SetActive(true);
                     _letterAnimator.OnStart(() =>
                     {
-                        _gameState = GameState.Playing;
                         _music.SetActive(true);
-                        BreakNextLetter();
+                        StartCoroutine(BreakAnimation());
                     });
                 });
             }
+        }
+
+        private IEnumerator BreakAnimation()
+        {
+            _gameState = GameState.BreakAnimation;
+            float timer = 1.0f; 
+
+            while (timer >= 0.0f)
+            {
+                yield return new WaitForEndOfFrame();
+                timer -= Time.deltaTime;
+                Vector3 aux = Random.insideUnitCircle * 0.1f;
+                _letters[_letterIndex].transform.position = aux + _letters[_letterIndex]._initialPosition;
+            }
+            
+            _gameState = GameState.Playing;
+            _letters[_letterIndex].transform.position = _letters[_letterIndex]._initialPosition;
+            BreakNextLetter();
         }
 
         private void BreakNextLetter()
@@ -73,7 +93,7 @@ namespace Game
             }
 
             _letterIndex++;
-            BreakNextLetter();
+            StartCoroutine(BreakAnimation());
         }
 
         private void ResetCurrentLetter()
@@ -97,6 +117,8 @@ namespace Game
                     break;
                 case GameState.End:
                     break;
+                case GameState.BreakAnimation:
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -104,7 +126,7 @@ namespace Game
 
         private void GameFinished()
         {
-            UnityEngine.Debug.Log("Game finish");
+            Debug.Log("Game finish");
             _gameState = GameState.Waiting;
             Invoke(nameof(ChangeState), _finishGameTimer);
         }
